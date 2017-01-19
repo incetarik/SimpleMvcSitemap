@@ -7,7 +7,7 @@ namespace SimpleMvcSitemap.Serialization
     {
         public static string ToIso8601Format(this DateTime? dateTime)
         {
-            return dateTime.HasValue ? dateTime.Value.ToString("s", System.Globalization.CultureInfo.InvariantCulture) : null;
+            return dateTime.HasValue ? XmlConvert.ToString(dateTime.Value) : null;
         }
     }
 }
