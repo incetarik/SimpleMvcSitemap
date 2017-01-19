@@ -2,16 +2,19 @@
 using FluentAssertions;
 using SimpleMvcSitemap.Serialization;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace SimpleMvcSitemap.Tests
 {
     public class XmlSerializerTests : TestBase
     {
+        private readonly ITestOutputHelper testOutputHelper;
         private readonly IXmlSerializer serializer;
         private readonly TestDataBuilder testDataBuilder;
 
-        public XmlSerializerTests()
+        public XmlSerializerTests(ITestOutputHelper testOutputHelper)
         {
+            this.testOutputHelper = testOutputHelper;
             serializer = new XmlSerializer();
             testDataBuilder = new TestDataBuilder();
         }
@@ -146,7 +149,9 @@ namespace SimpleMvcSitemap.Tests
 
         private string SerializeSitemap(SitemapNode sitemapNode)
         {
-            return serializer.Serialize(new SitemapModel(new List<SitemapNode> { sitemapNode }));
+            var result = serializer.Serialize(new SitemapModel(new List<SitemapNode> { sitemapNode }));
+            testOutputHelper.WriteLine(result);
+            return result;
         }
     }
 }

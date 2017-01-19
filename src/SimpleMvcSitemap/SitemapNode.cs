@@ -40,8 +40,18 @@ namespace SimpleMvcSitemap
         /// <summary>
         /// Shows the date the URL was last modified, value is optional.
         /// </summary>
-        [XmlElement("lastmod", Order = 2)]
+        [XmlIgnore]
         public DateTime? LastModificationDate { get; set; }
+
+        /// <summary>
+        /// Converts LastModificationDate to ISO 8601 format
+        /// </summary>
+        [XmlElement("lastmod", Order = 2)]
+        public string LastModificationDateString
+        {
+            get { return LastModificationDate.ToIso8601Format(); }
+            set { }
+        }
 
 
         /// <summary>
